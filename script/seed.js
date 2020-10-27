@@ -13,7 +13,6 @@ async function seed() {
     User.create({username: 'cody', password: '123'}),
     User.create({username: 'murphy', password: '123'})
   ])
-  console.log(`seeded ${users.length} users`)
 
   await Promise.all(
     questions.map(question => {
@@ -21,15 +20,12 @@ async function seed() {
     })
   )
 
-  console.log(`seeded ${questions.length} questions`)
-
   await Promise.all(
     options.map(option => {
       return Option.create(option)
     })
   )
 
-  console.log(`seeded ${options.length} options`)
   console.log(`seeded successfully`)
 }
 
