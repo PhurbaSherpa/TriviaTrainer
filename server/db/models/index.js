@@ -5,7 +5,6 @@ const Option = require('./option')
 const QuizQuestion = require('./quizQuestion')
 
 User.hasMany(Quiz)
-
 Quiz.belongsToMany(Question, {through: QuizQuestion})
 Question.belongsToMany(Quiz, {through: QuizQuestion})
 

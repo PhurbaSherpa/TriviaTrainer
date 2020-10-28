@@ -9,6 +9,22 @@ const seed = require('../../script/seed')
 
 describe('Quiz routes', () => {
   let cody = {username: 'cody', password: '123'}
+  let quiz = {
+    quizId: 5,
+    questionAnswers: {
+      1: 4,
+      2: 8,
+      3: 12,
+      4: 16,
+      5: 20,
+      6: 24,
+      7: 28,
+      8: 32,
+      9: 35,
+      10: 49
+    },
+    percentage: 100
+  }
 
   beforeEach(async () => {
     return db.sync({force: true})
@@ -46,11 +62,50 @@ describe('Quiz routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.a('object')
-          expect(res.body.id).to.be.equal(1)
           expect(res.body.userId).to.be.equal(1)
-          expect(res.body.percentage).to.be.equal(90)
           expect(res.body.questions.length).to.be.equal(10)
         })
     })
-  }) // end describe('/api/quiz')
+  }) // end describe('/api/quiz/:id')
+  describe('POST /api/quiz creates a new quiz if ones not already', () => {
+    beforeEach(async () => {
+      await seed()
+    })
+    it('needs a user to be accessed - NOT LOGGED IN', async () => {
+      await agent.post('/api/quiz/').expect(401)
+    })
+    it('gets users quiz - LOGGED IN', async () => {
+      await agent.post('/auth/login').send(cody)
+      await agent
+        .post('/api/quiz/')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.a('object')
+          expect(res.body.percentage).to.be.equal(null)
+          expect(res.body.userId).to.be.equal(1)
+        })
+    })
+
+    describe('POST /api/quiz creates a new quiz if ones not already', () => {
+      beforeEach(async () => {
+        await seed()
+      })
+      it('needs a user to be accessed - NOT LOGGED IN', async () => {
+        await agent.post('/api/quiz/').expect(401)
+      })
+      it('gets users quiz - LOGGED IN', async () => {
+        await agent.post('/auth/login').send(cody)
+        await agent.post('/api/quiz')
+        await agent
+          .post('/api/quiz/')
+          .send(quiz)
+          .expect(200)
+          .then(res => {
+            expect(res.body).to.be.a('object')
+            expect(res.body.percentage).to.be.equal(null)
+            expect(res.body.userId).to.be.equal(1)
+          })
+      })
+    })
+  }) // end describe('POST /api/quiz')
 }) // end describe('Questions routes')

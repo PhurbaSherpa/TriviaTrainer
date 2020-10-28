@@ -45,7 +45,7 @@ const options = [
     id: 8,
     questionId: 2,
     option: 'Et tu, Brute?',
-    isCorrect: false
+    isCorrect: true
   },
   {
     id: 9,

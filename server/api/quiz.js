@@ -46,3 +46,50 @@ router.get('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      let active = await Quiz.findOne({
+        where: {
+          userId: req.user.id,
+          percentage: null
+        }
+      })
+      if (!active) {
+        let quiz = await Quiz.create({
+          userId: req.user.id,
+          percentage: null
+        })
+        if (quiz) {
+          res.json(quiz)
+        } else {
+          res.sendStatus(204)
+        }
+      } else {
+        res.json(active)
+      }
+    } else {
+      res.sendStatus(401)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/submit', async (req, res, next) => {
+  try {
+    const {quizId, questionAnswers, percentage} = req.body
+
+    for (let questionId of questionAnswers) {
+      let userChoice = questionAnswers[questionId]
+      await QuizQuestion.create({quizId, questionId, userChoice})
+    }
+
+    let quiz = await Quiz.findOne({where: {quizId: quizId}})
+    quiz.percentage = percentage
+    quiz.save()
+  } catch (error) {
+    next(error)
+  }
+})
