@@ -13,7 +13,11 @@ router.get('/', async (req, res, next) => {
         model: Option
       }
     })
-    res.json(questions)
+    if (questions) {
+      res.json(questions)
+    } else {
+      res.sendStatus(204)
+    }
   } catch (err) {
     next(err)
   }
