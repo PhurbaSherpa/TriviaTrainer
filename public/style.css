@@ -21,6 +21,11 @@ form div {
   display: inline-block;
 }
 
+.paddingtop {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
 /* Navbar */
 
 .navitem {
@@ -47,4 +52,31 @@ form div {
   margin-top: 10%;
 }
 
-/* home page */
+/* userhome */
+
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.quizbutton {
+  width: 200px;
+  height: 50px;
+}
+
+/* pastQuizCard */
+
+.pastQuizCard {
+  border: solid rgba(0, 0, 0, 0.4) 1px;
+  padding: 20px 50px 20px 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewbutton {
+  color: black;
+}

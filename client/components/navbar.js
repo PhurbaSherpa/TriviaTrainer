@@ -7,7 +7,9 @@ import {Navbar, Nav} from 'react-bootstrap'
 
 const navbar = ({handleClick, isLoggedIn}) => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Navbar.Brand href="#home">Trivia Trainer</Navbar.Brand>
+    <Navbar.Brand href="#home">
+      <h3>Trivia Trainer</h3>
+    </Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       {isLoggedIn ? (

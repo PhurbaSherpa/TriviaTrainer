@@ -1,16 +1,36 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-
+import {Button} from 'react-bootstrap'
+import {getAllQuizzes} from '../store'
+import {PastQuizCard} from './pastQuizCard'
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {username} = props
+  const {username, getAllQuizzes, quizzes} = props
+
+  useEffect(
+    () => {
+      getAllQuizzes()
+    },
+    [getAllQuizzes]
+  )
 
   return (
-    <div>
-      <h3>Welcome, {username}</h3>
+    <div className="container paddingtop">
+      <div className="welcome mb-5">
+        <h1 className="mb-5">Welcome, {username}</h1>
+        <Button className="quizbutton">Take Quiz</Button>
+      </div>
+      <div className="pastquizzes">
+        <h3>Past Quizzes</h3>
+        {quizzes && quizzes.length
+          ? quizzes.map(quiz => {
+              return <PastQuizCard quiz={quiz} />
+            })
+          : null}
+      </div>
     </div>
   )
 }
@@ -18,13 +38,15 @@ export const UserHome = props => {
 /**
  * CONTAINER
  */
-const mapState = state => {
-  return {
-    username: state.user.username
-  }
-}
+const mapState = state => ({
+  username: state.user.username,
+  quizzes: state.quiz.allQuizzes
+})
+const mapDispatch = dispatch => ({
+  getAllQuizzes: () => dispatch(getAllQuizzes())
+})
 
-export default connect(mapState)(UserHome)
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES
