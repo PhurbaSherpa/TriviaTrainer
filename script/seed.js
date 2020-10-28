@@ -1,10 +1,17 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Question, Option, Quiz} = require('../server/db/models')
+const {
+  User,
+  Question,
+  Option,
+  Quiz,
+  QuizQuestion
+} = require('../server/db/models')
 const questions = require('./questions')
 const options = require('./options')
 const quizzes = require('./quizzes')
+const quizQuestions = require('./quizQuestions')
 
 async function seed() {
   await db.sync({force: true})
@@ -30,6 +37,12 @@ async function seed() {
   await Promise.all(
     quizzes.map(quiz => {
       return Quiz.create(quiz)
+    })
+  )
+
+  await Promise.all(
+    quizQuestions.map(quizQuestion => {
+      return QuizQuestion.create(quizQuestion)
     })
   )
 

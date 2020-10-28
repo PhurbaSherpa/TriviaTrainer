@@ -7,7 +7,7 @@ const quizzes = [
   {
     id: 2,
     userId: 1,
-    percentage: 85
+    percentage: 80
   },
   {
     id: 3,

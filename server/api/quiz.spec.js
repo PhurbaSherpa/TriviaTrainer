@@ -21,7 +21,7 @@ describe('Quiz routes', () => {
     it('needs a user to be accessed - NOT LOGGED IN', async () => {
       await agent.get('/api/quiz').expect(401)
     })
-    it('gets all users owned stocks - LOGGED IN', async () => {
+    it('gets users quiz - LOGGED IN', async () => {
       await agent.post('/auth/login').send(cody)
       await agent
         .get('/api/quiz')
@@ -29,6 +29,27 @@ describe('Quiz routes', () => {
         .then(res => {
           expect(res.body).to.be.a('array')
           expect(res.body.length).to.be.equal(2)
+        })
+    })
+  }) // end describe('/api/quiz')
+  describe('/api/quiz/:id retrieves a logged in users quiz', () => {
+    beforeEach(async () => {
+      await seed()
+    })
+    it('needs a user to be accessed - NOT LOGGED IN', async () => {
+      await agent.get('/api/quiz/1').expect(401)
+    })
+    it('gets users quiz - LOGGED IN', async () => {
+      await agent.post('/auth/login').send(cody)
+      await agent
+        .get('/api/quiz/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.a('object')
+          expect(res.body.id).to.be.equal(1)
+          expect(res.body.userId).to.be.equal(1)
+          expect(res.body.percentage).to.be.equal(90)
+          expect(res.body.questions.length).to.be.equal(10)
         })
     })
   }) // end describe('/api/quiz')
