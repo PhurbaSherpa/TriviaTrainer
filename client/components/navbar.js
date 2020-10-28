@@ -3,29 +3,31 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {Navbar, Nav} from 'react-bootstrap'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
-    <nav>
+const navbar = ({handleClick, isLoggedIn}) => (
+  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar.Brand href="#home">Trivia Trainer</Navbar.Brand>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+    <Navbar.Collapse id="responsive-navbar-nav">
       {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
+        <Nav className="mr-auto">
+          <Nav.Item className="navitem" onClick={handleClick}>
             Logout
-          </a>
-        </div>
+          </Nav.Item>
+        </Nav>
       ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
+        <Nav className="mr-auto">
+          <Nav.Item className="navitem" as={Link} to="/login" href="#home">
+            Login
+          </Nav.Item>
+          <Nav.Item className="navitem" as={Link} to="/signup" href="#link">
+            Sign Up
+          </Nav.Item>
+        </Nav>
       )}
-    </nav>
-    <hr />
-  </div>
+    </Navbar.Collapse>
+  </Navbar>
 )
 
 /**
@@ -45,12 +47,12 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(navbar)
 
 /**
  * PROP TYPES
  */
-Navbar.propTypes = {
+navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }

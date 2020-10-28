@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: #34d3eb;
 }
 
 a {
@@ -19,3 +20,31 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* Navbar */
+
+.navitem {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* authform */
+
+.authpage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authform {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.4);
+  padding: 3%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+/* home page */
