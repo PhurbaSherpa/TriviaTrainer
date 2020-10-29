@@ -33,8 +33,8 @@ const QuizCard = props => {
       }
     >
       <h5>Question {questionNumber}:</h5>
-      <div>{question.question}</div>
-      <div>
+      <div className="question">{question.question}</div>
+      <div className="options">
         {question.options.sort((a, b) => b.id - a.id).map((option, index) => {
           return (
             <div key={index}>
