@@ -11,12 +11,24 @@ enzyme.configure({adapter})
 
 describe('UserHome', () => {
   let userHome
+  let quizzes = [
+    {
+      id: 1,
+      percentage: 100,
+      createdAt: '2020-10-29T22:08:31.069Z',
+      updatedAt: '2020-10-29T22:38:21.012Z',
+      userId: 1
+    }
+  ]
 
   beforeEach(() => {
-    userHome = shallow(<UserHome email="cody@email.com" />)
+    userHome = shallow(<UserHome username="Cody" quizzes={quizzes} />)
   })
 
-  it('renders the email in an h3', () => {
-    expect(userHome.find('h3').text()).to.be.equal('Welcome, cody@email.com')
+  it('renders the username in an h1', () => {
+    expect(userHome.find('h1').text()).to.be.equal(`Welcome, Cody`)
+  })
+  it('renders all the past quizzes', () => {
+    expect(userHome.find('div.pastquizzes')).to.have.lengthOf(1)
   })
 })
