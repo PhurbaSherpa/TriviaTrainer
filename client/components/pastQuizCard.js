@@ -1,20 +1,27 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
-import history from 'history'
 import {Link} from 'react-router-dom'
+import moment from 'moment'
 
 /**
  * COMPONENT
  */
 export const PastQuizCard = props => {
-  const {quiz, history} = props
+  const {quiz} = props
 
   return (
     <div className="container pastQuizCard">
       <div>
-        <div>Start Time: {quiz.createdAt}</div>
-        <div>Finish Time: {quiz.updatedAt}</div>
-        <div>Score: {quiz.percentage}</div>
+        <div>
+          Start Time: {moment(quiz.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+        </div>
+        <div>
+          Finish Time:{' '}
+          {moment(quiz.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}
+        </div>
+        <div>
+          <strong>Score: {quiz.percentage}</strong>
+        </div>
       </div>
       <div>
         <Button

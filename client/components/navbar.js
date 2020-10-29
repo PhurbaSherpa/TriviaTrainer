@@ -7,19 +7,19 @@ import {Navbar, Nav} from 'react-bootstrap'
 
 const navbar = ({handleClick, isLoggedIn}) => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Navbar.Brand href="#home">
+    <Navbar.Brand as={Link} to="/home">
       <h3>Trivia Trainer</h3>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       {isLoggedIn ? (
-        <Nav className="mr-auto">
+        <Nav className="ml-auto">
           <Nav.Item className="navitem" onClick={handleClick}>
             Logout
           </Nav.Item>
         </Nav>
       ) : (
-        <Nav className="mr-auto">
+        <Nav className="ml-auto">
           <Nav.Item className="navitem" as={Link} to="/login" href="#home">
             Login
           </Nav.Item>
