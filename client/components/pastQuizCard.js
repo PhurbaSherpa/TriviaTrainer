@@ -1,11 +1,13 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
+import history from 'history'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 export const PastQuizCard = props => {
-  const {quiz} = props
+  const {quiz, history} = props
 
   return (
     <div className="container pastQuizCard">
@@ -15,7 +17,12 @@ export const PastQuizCard = props => {
         <div>Score: {quiz.percentage}</div>
       </div>
       <div>
-        <Button className="reviewbutton" variant="danger">
+        <Button
+          as={Link}
+          to={`/reviewquiz/${quiz.id}`}
+          className="reviewbutton"
+          variant="danger"
+        >
           Review
         </Button>
       </div>

@@ -9,11 +9,13 @@ const QuizQuestion = db.define('quizQuestion', {
   },
   quizId: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    unique: false
   },
   questionId: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    unique: false
   },
   userChoice: {
     type: Sequelize.INTEGER,

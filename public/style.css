@@ -1,6 +1,5 @@
 body {
   font-family: sans-serif;
-  background-color: #34d3eb;
 }
 
 a {
@@ -79,4 +78,11 @@ form div {
 
 .reviewbutton {
   color: black;
+}
+
+/* quizCard */
+
+.radiobtn * {
+  background-color: white;
+  border: none;
 }

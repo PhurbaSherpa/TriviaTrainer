@@ -8,10 +8,7 @@ const GET_ALL_QUIZZES = 'GET_ALL_QUIZZES'
 /**
  * INITIAL STATE
  */
-const defaultQuizState = {
-  allQuizzes: [],
-  selected: {}
-}
+const defaultQuizzesState = []
 
 /**
  * ACTION CREATORS
@@ -33,10 +30,10 @@ export const getAllQuizzes = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultQuizState, action) {
+export default function(state = defaultQuizzesState, action) {
   switch (action.type) {
     case GET_ALL_QUIZZES:
-      return {...state, allQuizzes: action.quizzes}
+      return action.quizzes
     default:
       return state
   }

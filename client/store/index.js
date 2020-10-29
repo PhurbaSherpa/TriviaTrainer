@@ -3,9 +3,9 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import quiz from './quiz'
+import quizzes from './quizzes'
 
-const reducer = combineReducers({user, quiz})
+const reducer = combineReducers({user, quizzes})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -13,4 +13,4 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
-export * from './quiz'
+export * from './quizzes'

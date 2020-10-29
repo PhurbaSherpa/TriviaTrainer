@@ -34,17 +34,17 @@ async function seed() {
     })
   )
 
-  await Promise.all(
-    quizzes.map(quiz => {
-      return Quiz.create(quiz)
-    })
-  )
+  // await Promise.all(
+  //   quizzes.map((quiz) => {
+  //     return Quiz.create(quiz)
+  //   })
+  // )
 
-  await Promise.all(
-    quizQuestions.map(quizQuestion => {
-      return QuizQuestion.create(quizQuestion)
-    })
-  )
+  // await Promise.all(
+  //   quizQuestions.map(quizQuestion => {
+  //     return QuizQuestion.create(quizQuestion)
+  //   })
+  // )
 
   console.log(`seeded successfully`)
 }
