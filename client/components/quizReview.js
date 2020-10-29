@@ -28,15 +28,17 @@ const QuizReview = props => {
         </Button>
       </div>
       {quizQuestions.questions
-        ? quizQuestions.questions.map((question, index) => {
-            return (
-              <ReviewCard
-                question={question}
-                key={index}
-                questionNumber={index + 1}
-              />
-            )
-          })
+        ? quizQuestions.questions
+            .sort((a, b) => b.id - a.id)
+            .map((question, index) => {
+              return (
+                <ReviewCard
+                  question={question}
+                  key={index}
+                  questionNumber={index + 1}
+                />
+              )
+            })
         : null}
     </div>
   )

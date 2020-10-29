@@ -13,7 +13,7 @@ const ReviewCard = props => {
       <h5>Question {questionNumber}:</h5>
       <div>{question.question}</div>
       <ul>
-        {question.options.map((option, index) => {
+        {question.options.sort((a, b) => b.id - a.id).map((option, index) => {
           return (
             <li
               key={index}

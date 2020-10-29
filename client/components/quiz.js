@@ -13,6 +13,8 @@ const Quiz = props => {
   const id = props.match.params.id
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState({})
+  const [activeQuestion, setActiveQuestion] = useState(1)
+  const [score, setScore] = useState(0)
   useEffect(() => {
     async function fetchRandomQuestions() {
       const {data} = await axios.get(`/api/questions`)
@@ -22,38 +24,34 @@ const Quiz = props => {
     fetchRandomQuestions()
   }, [])
 
-  const calculateScore = () => {
-    let score = 0
-    for (let question of questions) {
-      let choice = answers[question.id]
-      if (question.options[choice].isCorrect) {
-        score += 10
-      }
-      answers[question.id] = question.options[choice].id
-    }
-    return score
+  const increaseScore = () => {
+    setScore(score + 10)
   }
 
   const handleSubmit = async () => {
-    let score = calculateScore()
+    for (let question of questions) {
+      let choice = answers[question.id]
+      answers[question.id] = question.options[choice].id
+    }
     await axios.post('/api/quiz/submit', {
       quizId: id,
       questionAnswers: answers,
       percentage: score
     })
-    history.push('/quizcompleted')
+    history.push('/home')
   }
 
   return (
     <div className="container paddingtop mb-5">
       <div>
         <h3>Quiz#{id}</h3>
+        <div>Score: {score}</div>
         <Button as={Link} to="/home" className="mb-5">
-          Back
+          Quit
         </Button>
       </div>
       {questions
-        ? questions.map((question, index) => {
+        ? questions.sort((a, b) => b.id - a.id).map((question, index) => {
             return (
               <QuizCard
                 question={question}
@@ -61,13 +59,18 @@ const Quiz = props => {
                 questionNumber={index + 1}
                 setAnswers={setAnswers}
                 answers={answers}
+                activeQuestion={activeQuestion}
+                setActiveQuestion={setActiveQuestion}
+                increaseScore={increaseScore}
               />
             )
           })
         : null}
-      <Button className="my-5" onClick={handleSubmit}>
-        Submit
-      </Button>
+      {activeQuestion > 10 ? (
+        <Button className="my-5" onClick={handleSubmit}>
+          Submit
+        </Button>
+      ) : null}
     </div>
   )
 }
