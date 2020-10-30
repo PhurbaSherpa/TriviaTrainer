@@ -29,7 +29,7 @@ const PageStepper = props => {
     )
   }
   return (
-    <Pagination className="mb-5" size="sm">
+    <Pagination className="mb-5 stepper" size="sm">
       <Pagination.First
         onClick={() => {
           setpage(0)

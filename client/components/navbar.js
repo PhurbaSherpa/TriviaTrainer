@@ -32,9 +32,6 @@ const navbar = ({handleClick, isLoggedIn}) => (
   </Navbar>
 )
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id
@@ -51,9 +48,6 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(navbar)
 
-/**
- * PROP TYPES
- */
 navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired

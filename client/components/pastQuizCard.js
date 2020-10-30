@@ -3,9 +3,6 @@ import {Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
 
-/**
- * COMPONENT
- */
 export const PastQuizCard = props => {
   const {quiz} = props
 

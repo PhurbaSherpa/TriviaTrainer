@@ -4,9 +4,6 @@ import axios from 'axios'
 import QuizCard from './quizCard'
 import {Link} from 'react-router-dom'
 
-/**
- * COMPONENT
- */
 const Quiz = props => {
   const {history} = props
   const id = props.match.params.id

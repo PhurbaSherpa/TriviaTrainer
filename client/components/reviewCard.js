@@ -2,9 +2,6 @@ import React, {useEffect, useState} from 'react'
 import {Button} from 'react-bootstrap'
 import axios from 'axios'
 
-/**
- * COMPONENT
- */
 const ReviewCard = props => {
   const {question, questionNumber} = props
 

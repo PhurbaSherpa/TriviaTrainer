@@ -2,34 +2,44 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Button} from 'react-bootstrap'
+import {Button, Form} from 'react-bootstrap'
 
-/**
- * COMPONENT
- */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div className="container authpage">
-      <form className="authform" onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
+    <div className="authpage">
+      <div className="introauth row px-0 mx-0">
+        <Form
+          className="authform col-6 col-4-md col-lg-4"
+          onSubmit={handleSubmit}
+          name={name}
+        >
+          <div>
+            <label htmlFor="username">
+              <small>Username</small>
+            </label>
+            <input name="username" type="text" />
+          </div>
+          <div>
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <input name="password" type="password" />
+          </div>
+          <div>
+            <Button type="submit">{displayName}</Button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+        </Form>
+        <div className="intro col-lg-6 col-12 my-5">
+          <p className="w-75">
+            Welcome To Trivia Trainer. The platform that allows you to become a
+            Trivia mastermind. Enjoy endless number of trivia questions and keep
+            track of your scores. Come now to PLAY, REVIEW , and IMPROVE.
+          </p>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <Button type="submit">{displayName}</Button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </div>
     </div>
   )
 }
@@ -65,9 +75,6 @@ const mapDispatch = dispatch => {
 export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 
-/**
- * PROP TYPES
- */
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,

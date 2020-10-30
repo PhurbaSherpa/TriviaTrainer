@@ -6,9 +6,7 @@ import {getAllQuizzes} from '../store'
 import QuizzesPage from './quizzesPage'
 import PageStepper from './PageStepper'
 import axios from 'axios'
-/**
- * COMPONENT
- */
+
 export const UserHome = props => {
   const {username, getAllQuizzes, quizzes, history} = props
 
@@ -34,8 +32,13 @@ export const UserHome = props => {
           Take Quiz
         </Button>
       </div>
-      <div className="pastquizzes">
-        <PageStepper quizzes={quizzes.length} page={page} setpage={setpage} />
+      <div className="pastquizzes mb-5">
+        <PageStepper
+          style={{margin: 'auto'}}
+          quizzes={quizzes.length}
+          page={page}
+          setpage={setpage}
+        />
         <h3>Past Quizzes</h3>
         <QuizzesPage
           quizzes={quizzes.slice(
@@ -48,9 +51,6 @@ export const UserHome = props => {
   )
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   username: state.user.username,
   quizzes: state.quizzes
@@ -61,9 +61,6 @@ const mapDispatch = dispatch => ({
 
 export default connect(mapState, mapDispatch)(UserHome)
 
-/**
- * PROP TYPES
- */
 UserHome.propTypes = {
   username: PropTypes.string
 }

@@ -4,9 +4,6 @@ import axios from 'axios'
 import ReviewCard from './reviewCard'
 import {Link} from 'react-router-dom'
 
-/**
- * COMPONENT
- */
 const QuizReview = props => {
   const id = props.match.params.id
   const [quizQuestions, setquizQuestions] = useState({})
