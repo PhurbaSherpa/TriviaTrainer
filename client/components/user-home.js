@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
 import {getAllQuizzes} from '../store'
-import {PastQuizCard} from './pastQuizCard'
-import history from 'history'
+import QuizzesPage from './quizzesPage'
+import PageStepper from './PageStepper'
 import axios from 'axios'
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {username, getAllQuizzes, quizzes, history} = props
+
+  const [page, setpage] = useState(0)
 
   useEffect(
     () => {
@@ -33,12 +35,14 @@ export const UserHome = props => {
         </Button>
       </div>
       <div className="pastquizzes">
+        <PageStepper quizzes={quizzes.length} page={page} setpage={setpage} />
         <h3>Past Quizzes</h3>
-        {quizzes && quizzes.length
-          ? quizzes.map((quiz, index) => {
-              return <PastQuizCard key={index} quiz={quiz} />
-            })
-          : null}
+        <QuizzesPage
+          quizzes={quizzes.slice(
+            page === 0 ? 0 : page * 5 - (page - 1),
+            (page + 1) * 5
+          )}
+        />
       </div>
     </div>
   )

@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {Button} from 'react-bootstrap'
+import {Button, ProgressBar} from 'react-bootstrap'
 import axios from 'axios'
 import QuizCard from './quizCard'
 import {Link} from 'react-router-dom'
-import histroy from 'history'
 
 /**
  * COMPONENT
@@ -43,6 +42,10 @@ const Quiz = props => {
 
   return (
     <div className="container paddingtop mb-5">
+      <ProgressBar
+        now={(activeQuestion - 1) * 10}
+        label={`${(activeQuestion - 1) * 10}%`}
+      />
       <div>
         <h3>Quiz#{id}</h3>
         <div>Score: {score}</div>
