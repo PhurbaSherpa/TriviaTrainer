@@ -1,6 +1,4 @@
-import React, {useEffect, useState} from 'react'
-import {Button} from 'react-bootstrap'
-import axios from 'axios'
+import React from 'react'
 
 const ReviewCard = props => {
   const {question, questionNumber} = props
@@ -8,7 +6,7 @@ const ReviewCard = props => {
   return (
     <div>
       <h5>Question {questionNumber}:</h5>
-      <div>{question.question}</div>
+      <div className="question">{question.question}</div>
       <ul>
         {question.options.sort((a, b) => b.id - a.id).map((option, index) => {
           return (
